@@ -2,7 +2,7 @@
  
 To link your Home Assistant with sensors, follow these steps:
 
-1. Install 'ESPHome'.
+1. Install 'ESPHome' on the Home Assistant home sever/interface.
 2. It may require you to connect to an external network with internet. If so, follow these steps:
     - Go to settings on the bottom left corner.
     - Click on 'Systems', then 'Network', followed by 'WLAN0', and select 'Wi-Fi'.
