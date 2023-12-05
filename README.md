@@ -1,6 +1,5 @@
 # Linking Home Assistant with Sensors
-
-**Body:**  
+ 
 To link your Home Assistant with sensors, follow these steps:
 
 1. Install 'ESPHome'.
