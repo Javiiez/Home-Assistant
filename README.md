@@ -34,7 +34,7 @@
 
 1. **Initial Setup:**
    - Wait until the Raspberry Pi completes processing configuration files and displays the "Home Assistant" logo with an URL address.
-   - Do not interact with the system until you see the "Home Assistant" logo and the IP address.
+   - Do not interact with the system until you see the "Home Assistant" logo and the URL address, which should be, 'http://homeassistant.local:8123'.
 
 2. **Network Configuration:**
    - Connect a keyboard to the Raspberry Pi.
@@ -47,7 +47,7 @@
 3. **Access Home Assistant:**
    - Find the URL address displayed on the Raspberry Pi, under the Home Assisant logo.
    - On another computer connected to the same network as the Raspberry Pi, open a web browser.
-   - Type the URL address provided by the Raspberry Pi into the web browser's address bar.
+   - Type the URL address ('http://homeassistant.local:8123') provided by the Raspberry Pi into the web browser's address bar.
    - Follow the on-screen instructions to pair up and create a user account for Home Assistant.
 
 4. **Extras**
