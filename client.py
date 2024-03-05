@@ -54,3 +54,15 @@ if __name__ == "__main__":
     # Disconnect from MQTT Broker
     client.disconnect()
     sys.exit()
+
+Traceback (most recent call last):
+  File "/home/jaleman/src/client2.py", line 40, in <module>
+    client = mqtt.Client(mqtt.Client, client_id=mqtt_client_id, protocol=mqtt.MQTTv5, transport=mqtt_transport)
+  File "/home/jaleman/.local/lib/python3.9/site-packages/paho/mqtt/client.py", line 769, in __init__
+    if self._callback_api_version not in CallbackAPIVersion:
+  File "/usr/lib/python3.9/enum.py", line 373, in __contains__
+    raise TypeError(
+TypeError: unsupported operand type(s) for 'in': 'type' and 'EnumMeta'
+
+
+
