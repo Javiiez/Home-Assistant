@@ -39,9 +39,9 @@
 2. **Network Configuration:**
    - Connect a keyboard to the Raspberry Pi.
    - Type `login` and press enter.
-   - Then, type `nmcli device connect`.
+   - Then, type `nmcli device wifi`.
    - Select the desired network for connection, in my case, my personal mobile hotspot.
-   - Type `nmcli device connect [network name] password [actual network password]`.
+   - Type `nmcli device wifi connect [network name] password [actual network password]`.
    - Wait for the confirmation message indicating successful connection.
 
 3. **Access Home Assistant:**
