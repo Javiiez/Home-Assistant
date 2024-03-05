@@ -33,7 +33,7 @@
 ## Configuration and Connection:
 
 1. **Initial Setup:**
-   - Wait until the Raspberry Pi completes processing configuration files and displays the "Home Assistant" logo with an IP address.
+   - Wait until the Raspberry Pi completes processing configuration files and displays the "Home Assistant" logo with an URL address.
    - Do not interact with the system until you see the "Home Assistant" logo and the IP address.
 
 2. **Network Configuration:**
@@ -45,9 +45,9 @@
    - Wait for the confirmation message indicating successful connection.
 
 3. **Access Home Assistant:**
-   - Find the IP address displayed on the Raspberry Pi, under the Home Assisant logo.
+   - Find the URL address displayed on the Raspberry Pi, under the Home Assisant logo.
    - On another computer connected to the same network as the Raspberry Pi, open a web browser.
-   - Type the IP address provided by the Raspberry Pi into the web browser's address bar.
+   - Type the URL address provided by the Raspberry Pi into the web browser's address bar.
    - Follow the on-screen instructions to pair up and create a user account for Home Assistant.
 
 4. **Extras**
