@@ -34,3 +34,5 @@ mqtt:
       value_template: "{{ value_json.distance | round(1) }}"
 ```
 This essentially enables the Home Assistant software to recognize another sensor. Now, let's switch to the other device where the Pi 3 and ultrasonic sensor are connected.
+
+Now, onto the Raspberry Pi 3, make sure that is connected to the same network as the Home Assistant. Then, 
