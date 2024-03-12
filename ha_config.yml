@@ -1,0 +1,9 @@
+mqtt_server_host: "172.20.10.4"
+mqtt_server_port: 1883
+mqtt_bind_address: ""
+mqtt_bind_port: 0
+mqtt_username: "mqtt-user"
+mqtt_password: "Javier05"
+mqtt_transport: "tcp"
+mqtt_keepalive: 60
+mqtt_client_id: "core-mosquitto"
