@@ -41,8 +41,8 @@ if __name__ == "__main__":
     client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id=mqtt_config['mqtt_client_id'], protocol=mqtt.MQTTv5, transport=mqtt_config['mqtt_transport'])
     client.username_pw_set(username=mqtt_config['mqtt_username'], password=mqtt_config['mqtt_password'])
 
-    client.connect(host = mqtt_config.mqtt_server_host, port = mqtt_config.mqtt_server_port,
-                    keepalive = mqtt_config.mqtt_keepalive, bind_address = mqtt_config.mqtt_bind_address, bind_port = mqtt_config.mqtt_bind_port, properties = None)
+    client.connect(host = mqtt_config['mqtt_server_host'], port = mqtt_config['mqtt_server_port'],
+                    keepalive = mqtt_config['mqtt_keepalive'], bind_address = mqtt_config['mqtt_bind_address'], bind_port = mqtt_config['mqtt_bind_port'], properties = None)
     client.on_connect = on_connect
     
     for cntr in range(10):
