@@ -20,7 +20,28 @@ GPIO_ECHO = 24
 #set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
 GPIO.setup(GPIO_ECHO, GPIO.IN)
- 
+
+
+def on_connect(client, userdata, flags, rc, properties=None):
+    if rc==0:
+        print("INFO :: Connected to MQTT Broker")
+    else:
+        print("ERROR :: Connection failed:", rc)
+
+
+def build_payload(distance):
+    payload_hash={"unique_id": "ultrasonic_sensor_2", 
+        "name": "Ultrasonic Sensor 2",
+        "state_topic": "/home/front_door/distance",
+        "device_class": "distance", 
+        "unit_of_measure": "cm",
+        "distance": distance,
+        "qos": 0,
+        "retain": True
+    }
+    payload=json.dumps(payload_hash) 
+    return payload
+    
  
 def distance():
     # set Trigger to HIGH
@@ -48,60 +69,55 @@ def distance():
     distance = (TimeElapsed * 34300) / 2
  
     return distance
+
+
+def send_mqtt(config, distance):
+    # connect mqttv5 client
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, 
+             client_id=config['mqtt_client_id'], protocol=mqtt.MQTTv5,
+             transport=config['mqtt_transport'])
+    client.username_pw_set(username=config['mqtt_username'],
+                           password=config['mqtt_password'])
+
+    client.connect(host = config['mqtt_server_host'], 
+                   port = config['mqtt_server_port'],
+                   keepalive = config['mqtt_keepalive'], 
+                   bind_address = config['mqtt_bind_address'], 
+                   bind_port = config['mqtt_bind_port'], 
+                   properties = None)
+    client.on_connect = on_connect
+    
+    client.publish("/home/front_door/distance", 
+                   build_payload(distance), 0, 
+                   retai   n=True)
+        
+    # client.loop_stop()
+    client.disconnect()
+    return
+
  
 if __name__ == '__main__':
+    with open('./ha_config.yml', 'r') as file:
+        mqtt_config = yaml.safe_load(file)
+        file.close()
+    
     try:
         while True:
             dist = distance()
             print ("Measured Distance = %.1f cm" % dist)
+            send_mqtt(mqtt_config, dist)
             time.sleep(1)
  
         # Reset by pressing CTRL + C
     except KeyboardInterrupt:
         print("Measurement stopped by User")
         GPIO.cleanup() 
+        sys.exit(0)
 
-with open('Home-Assistant/ha_config.yml', 'r') as file:
-    mqtt_config = yaml.safe_load(file)
     
 
 
-def on_connect(client, userdata, flags, rc, properties=None):
-    if rc==0:
-        print("INFO :: Connected to MQTT Broker")
-    else:
-        print("ERROR :: Connection failed:", rc)
 
 
-
-def build_payload(distance):
-    payload_hash={"unique_id": "ultrasonic_sensor_2", 
-        "name": "Ultrasonic Sensor 2",
-        "state_topic": "/home/front_door/distance",
-        "device_class": "distance", 
-        "unit_of_measure": "cm",
-        "distance": distance,
-        "qos": 0,
-        "retain": True
-    }
-    payload=json.dumps(payload_hash) 
-    return payload
-
-
-if __name__ == "__main__":
-    # connect mqttv5 client
-    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id=mqtt_config['mqtt_client_id'], protocol=mqtt.MQTTv5, transport=mqtt_config['mqtt_transport'])
-    client.username_pw_set(username=mqtt_config['mqtt_username'], password=mqtt_config['mqtt_password'])
-
-    client.connect(host = mqtt_config['mqtt_server_host'], port = mqtt_config['mqtt_server_port'],
-                    keepalive = mqtt_config['mqtt_keepalive'], bind_address = mqtt_config['mqtt_bind_address'], bind_port = mqtt_config['mqtt_bind_port'], properties = None)
-    client.on_connect = on_connect
     
-    dist= distance()
     
-    client.publish("/home/front_door/distance", build_payload(dist), 0, retain=True)
-    time.sleep(1)
-        
-    client.loop_stop()
-    client.disconnect()
-    sys.exit()
