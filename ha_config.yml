@@ -1,4 +1,4 @@
-mqtt_server_host: "172.20.10.4"
+mqtt_server_host: "192.168.2.3"
 mqtt_server_port: 1883
 mqtt_bind_address: ""
 mqtt_bind_port: 0

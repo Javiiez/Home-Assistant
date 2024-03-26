@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-# TO DO: take a look at looping the fake publish. 
-
 import sys
 import time
 import yaml
@@ -14,8 +12,8 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
  
 #set GPIO Pins
-GPIO_TRIGGER = 18
-GPIO_ECHO = 24
+GPIO_TRIGGER = 12
+GPIO_ECHO = 18
  
 #set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
@@ -30,6 +28,7 @@ def on_connect(client, userdata, flags, rc, properties=None):
 
 
 def build_payload(distance):
+    
     payload_hash={"unique_id": "ultrasonic_sensor_2", 
         "name": "Ultrasonic Sensor 2",
         "state_topic": "/home/front_door/distance",
@@ -67,6 +66,7 @@ def distance():
     # multiply with the sonic speed (34300 cm/s)
     # and divide by 2, because there and back
     distance = (TimeElapsed * 34300) / 2
+        
  
     return distance
 
@@ -89,7 +89,7 @@ def send_mqtt(config, distance):
     
     client.publish("/home/front_door/distance", 
                    build_payload(distance), 0, 
-                   retai   n=True)
+                   retain=True)
         
     # client.loop_stop()
     client.disconnect()
@@ -114,10 +114,3 @@ if __name__ == '__main__':
         GPIO.cleanup() 
         sys.exit(0)
 
-    
-
-
-
-
-    
-    
